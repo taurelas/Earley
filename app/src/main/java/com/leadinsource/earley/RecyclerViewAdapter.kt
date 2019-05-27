@@ -7,8 +7,16 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class RecyclerViewAdapter(var data: MutableList<Project>, val callback: Callback) :
+class RecyclerViewAdapter(private val callback: Callback) :
     RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+
+    private val data: MutableList<Project> = mutableListOf()
+
+    fun setData(newData: List<Project>) {
+        data.clear()
+        data.addAll(newData)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
