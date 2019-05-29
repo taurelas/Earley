@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 
 class MainActivityViewModel : ViewModel() {
 
-    private val liveData: MutableLiveData<List<Project>> by lazy {
-        MutableLiveData<List<Project>>().also {
+    private val liveData: MutableLiveData<MutableList<Project>> by lazy {
+        MutableLiveData<MutableList<Project>>().also {
             it.postValue(mutableListOf(
                 Project("Project 1"), Project("Project 2"), Project("Project 3"),
                 Project("Project 4"), Project("Project 5"), Project("Project 6")
@@ -15,7 +15,7 @@ class MainActivityViewModel : ViewModel() {
         }
     }
 
-    fun getProjects(): LiveData<List<Project>> {
+    fun getProjects(): LiveData<MutableList<Project>> {
         return liveData
     }
 
@@ -36,5 +36,11 @@ class MainActivityViewModel : ViewModel() {
             result.add(element)
             liveData.postValue(result)
         }
+    }
+
+    fun addProject(project: Project) {
+        val data = liveData.value
+        data?.add(0, project)
+        liveData.postValue(data)
     }
 }
