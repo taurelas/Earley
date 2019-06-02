@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 class MainActivity : AppCompatActivity(), RecyclerViewAdapter.Callback,
     AddProjectFragment.OnFragmentInteractionListener {
 
-    lateinit var addProjectFragment: Fragment
+    private lateinit var addProjectFragment: Fragment
 
     override fun onFragmentInteraction(project: Project) {
         viewModel.addProject(project)
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.Callback,
 
     // Let's try to implement as much as possible from https://developer.android.com/jetpack
 
-    lateinit var viewModel: MainActivityViewModel
+    private lateinit var viewModel: MainActivityViewModel
     private lateinit var viewAdapter: RecyclerViewAdapter
     private var recyclerView: RecyclerView? = null
 
@@ -79,8 +79,8 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.Callback,
         fragmentTransaction.commit()
     }
 
-    override fun onClick(position: Int) {
-        viewModel.setItemDone(position)
+    override fun onClick(project: Project) {
+        viewModel.setItemDone(project)
 
     }
 

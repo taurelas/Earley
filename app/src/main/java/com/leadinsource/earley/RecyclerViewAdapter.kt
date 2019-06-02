@@ -29,7 +29,7 @@ class RecyclerViewAdapter(private val callback: Callback) :
         holder.textView?.text = data[position].name
         holder.checkBox?.setOnClickListener {
             holder.checkBox.isChecked = false
-            callback.onClick(position)
+            callback.onClick(data[position])
         }
     }
 
@@ -44,7 +44,7 @@ class RecyclerViewAdapter(private val callback: Callback) :
     }
 
     interface Callback {
-        fun onClick(position: Int)
+        fun onClick(project: Project)
     }
 
 }

@@ -73,7 +73,7 @@ class AddProjectFragment : DialogFragment() {
     }
 
     private fun onButtonPressed(view: View) {
-        listener?.onFragmentInteraction(Project(etProjectName.text.toString()))
+        listener?.onFragmentInteraction(Project(name = etProjectName.text.toString(), position = 0))
         hideKeyboard()
     }
 

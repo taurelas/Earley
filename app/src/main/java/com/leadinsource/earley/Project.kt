@@ -1,4 +1,3 @@
 package com.leadinsource.earley
 
-class Project(var name: String) {
-}
+class Project(val uuid: Int = 0, var name: String, var position:Int)
