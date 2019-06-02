@@ -8,4 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ListItemText" >
+        <item name="android:layout_marginStart">@dimen/normal_item_start_margin_text</item>
+        <item name="android:layout_marginTop">@dimen/normal_item_horizontal_margin</item>
+        <item name="android:layout_marginBottom">@dimen/normal_item_horizontal_margin</item>
+        <item name="android:textSize">@dimen/normal_item_text_size</item>
+
+    </style>
+
+
 </resources>
