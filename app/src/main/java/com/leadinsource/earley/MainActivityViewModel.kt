@@ -19,6 +19,12 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
+    fun getCurrentProject(): LiveData<Project> {
+        return Transformations.map(liveData) {
+            it.sortedBy { project -> project.position }[0]
+        }
+    }
+
     fun setItemDone(project: Project) {
         projectRepository.moveToTheEnd(project)
     }

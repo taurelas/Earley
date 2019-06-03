@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), RecyclerViewAdapter.Callback,
     AddProjectFragment.OnFragmentInteractionListener {
@@ -41,6 +43,10 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.Callback,
 
             viewAdapter.setData(it)
 
+        })
+
+        viewModel.getCurrentProject().observe(this, Observer {
+            fab.setOnClickListener { _ -> this.viewModel.setItemDone(it) }
         })
     }
 
@@ -81,7 +87,6 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.Callback,
 
     override fun onClick(project: Project) {
         viewModel.setItemDone(project)
-
     }
 
     private fun removeAddProjectFragment() {

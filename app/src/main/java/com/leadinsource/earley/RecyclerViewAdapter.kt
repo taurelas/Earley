@@ -19,10 +19,18 @@ class RecyclerViewAdapter(private val callback: Callback) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_item, parent, false)
 
-        return ViewHolder(view)
+        if(viewType==ViewType.CURRENT_ITEM.ordinal)
+            return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.current_list_item, parent, false))
+
+        return ViewHolder(LayoutInflater.from(parent.context)
+            .inflate(R.layout.list_item, parent, false))
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        if (position==0) return ViewType.CURRENT_ITEM.ordinal
+
+        return ViewType.NORMAL_ITEM.ordinal
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -47,4 +55,9 @@ class RecyclerViewAdapter(private val callback: Callback) :
         fun onClick(project: Project)
     }
 
+}
+
+private enum class ViewType {
+    CURRENT_ITEM,
+    NORMAL_ITEM
 }

@@ -3,6 +3,8 @@ package com.leadinsource.earley
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.leadinsource.earley.db.AppDatabase
 import com.leadinsource.earley.db.ProjectData
 import java.util.concurrent.Executors
@@ -35,7 +37,13 @@ class ProjectRepository private constructor(applicationContext: Context) {
     private val db: AppDatabase = Room.databaseBuilder(
         applicationContext,
         AppDatabase::class.java, "database.db"
-    ).build()
+    )
+        .addMigrations(object : Migration(1, 2) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE ProjectData ADD COLUMN info TEXT NOT NULL DEFAULT ''")
+            }
+        })
+        .build()
 
     init {
         allProjects = db.projectDao().getAll()

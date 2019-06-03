@@ -9,11 +9,12 @@ import com.leadinsource.earley.Project
 data class ProjectData(
     @PrimaryKey(autoGenerate = true) val uuid: Int,
     @ColumnInfo(name = "name") val name: String?,
-    @ColumnInfo(name = "position") val position: Int?
+    @ColumnInfo(name = "position") val position: Int?,
+    @ColumnInfo(name = "info") val info: String
 ) {
     companion object {
         fun fromProject(project: Project): ProjectData {
-            return ProjectData(project.uuid, project.name, project.position)
+            return ProjectData(project.uuid, project.name, project.position, project.info)
         }
     }
 }
